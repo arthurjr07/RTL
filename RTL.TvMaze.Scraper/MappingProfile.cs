@@ -9,7 +9,7 @@ namespace RTL.TvMaze.Scraper
         public MappingProfile()
         {
             CreateMap<Show, ShowModel>()
-                .ForMember(dest => dest.Cast, opt => opt.MapFrom(src => src.Casts.Select(c => c.Person)));
+                .ForMember(dest => dest.Cast, opt => opt.MapFrom(src => src.Casts.Select(c => c.Person).OrderByDescending(c => c.Birthday)));
             CreateMap<Person, PersonModel>()
                 .ForMember(dest => dest.Birthday, opt => opt.MapFrom(src => src.Birthday.GetValueOrDefault().ToString("yyyy-MM-dd")));
         }
